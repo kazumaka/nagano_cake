@@ -9,7 +9,7 @@
   <%= f.text_area :introduction %>
   <h4>ジャンル</h4>
   <%= f.collection_select(:genre_id, @genres, :id, :name, {prompt: "選択してください"} ) %>
-  <h4>税込価格</h4>
+  <h4>税抜価格</h4>
   <%= f.text_field :price %>円
   <h4>販売ステータス</h4>
   <%= f.radio_button :is_active, "販売中", checked: true %>販売中 <%= f.radio_button :is_active, "販売停止中" %>販売停止中
