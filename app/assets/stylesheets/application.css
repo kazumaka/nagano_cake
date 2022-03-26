@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+.new_admin{
+  margin: 20px;
+}
+
+
+
+.form-group{
+  margin: 30px auto;
+}

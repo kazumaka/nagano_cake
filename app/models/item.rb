@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   has_one_attached :profile_image
   belongs_to :genre
+  has_many :order_details, dependent: :destroy
   
   def get_profile_image(width,height)
     unless profile_image.attached?

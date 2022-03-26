@@ -1,19 +1,47 @@
-<h2>商品詳細</h2>
+<div class="container">
+  <label class="mt-4 mb-4 lead bg-light">商品詳細</label>
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag @item.get_profile_image(100,100),class: "img-fluid" %>
+    </div>
 
-<%= image_tag @item.get_profile_image(64,64) %>
+    <div class="col-md-5">
+      <div>
+        <label class="mr-4">商品名</label>
+        <label class="ml-5"><%= @item.name %></label>
+      </div>
+      <div>
+        <label class="mr-2">商品説明</label>
+        <label class="ml-5"><%= @item.introduction %></label>
+      </div>
+      <div>
+        <label class="mr-2">ジャンル</label>
+        <label class="ml-5"><%= @item.genre.name %></label>
+      </div>
+      <div>
+        <label>税込価格<br>(税抜価格)</label>
+        <label class="ml-5">
+          <%= @item.add_tax_price.to_s(:dalimited) %>
+          (<%= @item.price %>)円
+        </label>
+      </div>
+      <div>
+        <label>販売ステータス</label>
+        <label class="ml-3">
+          <% if @item.is_active == true %>
+            <label class="text-success">販売中</label>
+          <% else %>
+            販売停止中
+          <% end %>
+        </label>
+      </div>
+      <div class="ml-5">
+        <%= link_to edit_admin_item_path(@item.id) do %>
+          <p class="btn btn-success">編集する</p>
+        <% end %>
+      </div>
 
-<label>商品名</label>
-<%= @item.name %>
-<label>商品説明</label>
-<%= @item.introduction %>
-<label>ジャンル</label>
-<%= @item.genre.name %>
-<label>税込価格<br>(税抜価格)</label>
-<%= @item.add_tax_price.to_s(:dalimited) %>
-(<%= @item.price %>)
-<label>販売ステータス</label>
-<%= @item.is_active %>
+    </div>
 
-<%= link_to admin_items_path do %>
-  編集する
-<% end %>
+  </div>
+</div>
