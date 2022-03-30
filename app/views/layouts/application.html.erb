@@ -43,6 +43,27 @@
                   ログアウト
                 <% end %>
               </li>
+            <% elsif customer_signed_in? %>
+               <li class="nav-item">
+                <%= link_to about_path ,class: "btn btn-default" do %>
+                  マイページ
+                <% end %>
+              </li>
+               <li class="nav-item">
+                <%= link_to about_path ,class: "btn btn-default" do %>
+                  商品一覧
+                <% end %>
+              </li>
+               <li class="nav-item">
+                <%= link_to about_path ,class: "btn btn-default" do %>
+                  カート
+                <% end %>
+              </li>
+               <li class="nav-item">
+                <%= link_to destroy_customer_session_path, method: :delete ,class: "btn btn-default" do %>
+                  ログアウト
+                <% end %>
+              </li>
             <% else %>
              <li class="nav-item">
                 <%= link_to about_path,class: "btn btn-default" do %>
@@ -50,17 +71,17 @@
                 <% end %>
               </li>
              <li class="nav-item">
-                <%= link_to admin_root_path ,class: "btn btn-default" do %>
+                <%= link_to about_path ,class: "btn btn-default" do %>
                   商品一覧
                 <% end %>
               </li>
              <li class="nav-item">
-                <%= link_to new_admin_registration_path ,class: "btn btn-default" do %>
+                <%= link_to new_customer_registration_path ,class: "btn btn-default" do %>
                   新規登録
                 <% end %>
               </li>
              <li class="nav-item">
-                <%= link_to new_admin_session_path ,class: "btn btn-default" do %>
+                <%= link_to new_customer_session_path ,class: "btn btn-default" do %>
                   ログイン
                 <% end %>
               </li>
