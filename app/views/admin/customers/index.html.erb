@@ -1,5 +1,5 @@
 <div class="container">
-  <label class="mt-4 mb-4 lead bg-light">会員</label>
+  <label class="mt-4 mb-4 lead bg-light">会員一覧</label>
   <table class="table">
     <thead>
       <tr>
@@ -9,21 +9,21 @@
         <th>ステータス</th>
       </tr>
     </thead>
-    <%= @customers.each do |customer| %>
+    <% @customers.each do |customer| %>
     <tbody>
       <tr>
         <td><%= customer.id %></td>
         <td>
           <%= link_to admin_customer_path(customer.id) do %>
-            <%= customer.name %>
+            <%= customer.last_name %><%= customer.first_name %>
           <% end %>
         </td>
         <td><%= customer.email %></td>
         <td>
           <% if customer.is_active == true %>
-            有効
-          <% else %>
             退会
+          <% else %>
+            有効
           <% end %>
         </td>
       </tr>
