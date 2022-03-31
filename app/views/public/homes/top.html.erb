@@ -8,10 +8,17 @@
   
   <h4>新着商品</h4>
   <div class="col-md-3">
+
   <% @items.each do |item| %>
+  <div>
     <%= image_tag item.get_profile_image(40,40),class: "img-fluid"  %>
+  </div>
+  <div>
     <%= item.name %>
+  </div>
+  <div>
     ¥<%= item.add_tax_price.to_s(:dalimited) %>
+  </div>
   <% end %>
   
   <%= link_to root_path do %>
