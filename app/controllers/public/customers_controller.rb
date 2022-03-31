@@ -18,7 +18,9 @@ class Public::CustomersController < ApplicationController
   end
   
   def secession
-    
+    @customer = current_customer
+    @customer.update(is_active: true)
+    redirect_to root_path
   end
   
   private
