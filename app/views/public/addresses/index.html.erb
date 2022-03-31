@@ -33,10 +33,10 @@
         <td><%= address.address %></td>
         <td><%= address.name %></td>
         <td>
-          <%= link_to root_path,class: "btn btn-success" do %>
+          <%= link_to edit_address_path(address.id),class: "btn btn-success" do %>
             編集する
           <% end %>
-          <%= link_to root_path,class: "btn btn-danger" do %>
+          <%= link_to destroy_address_path(address.id),class: "btn btn-danger",method: :delete, "data-confirm" => "本当に消しますか？" do %>
             削除する
           <% end %>
         </td>

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-  
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
@@ -21,9 +21,10 @@ Rails.application.routes.draw do
     patch "customers/registration_edit" => "customers#update",as: "customers"
     get "customers/confirm" => "customers#confirm",as: "confirm"
     patch "customer/secession" => "customers#secession",as: "secession"
-    resources :addresses,except:[:new, :show]
+    resources :addresses,except:[:new, :show, :destroy]
+    delete "addresses/:id" => "addresses#destroy",as: "destroy_address"
   end
-  
+
 
   namespace :admin do
     root to: "homes#top"
