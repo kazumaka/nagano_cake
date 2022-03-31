@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'addresses/index'
+    get 'addresses/edit'
+  end
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
     patch "customers/registration_edit" => "customers#update",as: "customers"
     get "customers/confirm" => "customers#confirm",as: "confirm"
     patch "customer/secession" => "customers#secession",as: "secession"
+    resources :addresses,except:[:new, :show]
   end
   
 
