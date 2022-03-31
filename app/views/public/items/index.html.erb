@@ -1,0 +1,8 @@
+<div class="container">
+  <label class="mt-4 mb-4 lead bg-light">商品一覧(全<%= @items.count %>件)</label>
+  <div class="row">
+    <% @items.each do |item| %>
+      <%= image_tag item.get_profile_image(100,100),class: "img-fluid" %>
+    <% end %>
+  </div>
+</div>
