@@ -1,2 +1,16 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <%= image_tag @item.get_profile_image(100,100) %>
+    </div>
+    <div class="col-md-6">
+      <h3><%= @item.name %></h3>
+      <%= @item.introduction %>
+      ￥¥<%= item.add_tax_price.to_s(:dalimited) %><label class="small">(税込)</label>
+      
+      <%= form_with model: @item do |f| %>
+      <%= f.hidden_field :name, value: @item.name %>
+      <% end %>
+    </div>
+  </div>
+</div>

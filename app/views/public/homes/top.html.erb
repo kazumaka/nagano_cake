@@ -5,23 +5,25 @@
     会員でない方も商品の閲覧はできますが、<br>
     購入には会員登録が必要になります。
   </p>
-  
+
   <h4>新着商品</h4>
-  <div class="col-md-3">
+  <div class="row">
 
   <% @items.each do |item| %>
-  <div>
-    <%= image_tag item.get_profile_image(40,40),class: "img-fluid"  %>
-  </div>
-  <div>
-    <%= item.name %>
-  </div>
-  <div>
-    ¥<%= item.add_tax_price.to_s(:dalimited) %>
+  <div class="col-md-3">
+    <div>
+      <%= image_tag item.get_profile_image(40,40),class: "img-fluid"  %>
+    </div>
+    <div>
+      <%= item.name %>
+    </div>
+    <div>
+      ¥<%= item.add_tax_price.to_s(:dalimited) %>
+    </div>
   </div>
   <% end %>
-  
-  <%= link_to root_path do %>
+
+  <%= link_to items_path do %>
     全ての商品を見る>
   <% end %>
   </div>

@@ -2,7 +2,17 @@
   <label class="mt-4 mb-4 lead bg-light">商品一覧(全<%= @items.count %>件)</label>
   <div class="row">
     <% @items.each do |item| %>
-      <%= image_tag item.get_profile_image(100,100),class: "img-fluid" %>
+      <div class="col-md-3">
+        <div>
+          <%= image_tag item.get_profile_image(100,100),class: "img-fluid" %>
+        </div>
+        <div>
+          <%= item.name %>
+        </div>
+        <div>
+          ¥<%= item.add_tax_price.to_s(:dalimited) %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
