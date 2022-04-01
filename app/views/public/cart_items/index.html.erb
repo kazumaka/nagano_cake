@@ -1,2 +1,44 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<div class="container">
+   <label class="mt-4 mb-4 lead bg-light">ショッピングカート</label>
+   <%= link_to root_path,class: "btn btn-danger" do %>
+     カートを空にする
+   <% end %>
+
+   <table class="table">
+     <thead>
+       <tr>
+         <th>商品名</th>
+         <th>単価（税込）</th>
+         <th>数量</th>
+         <th>小計</th>
+         <th></th>
+       </tr>
+     </thead>
+     <% @cart_items.each do |cart_item| %>
+     <tbody>
+       <tr>
+         <td><%= cart_item.name %></td>
+         <td><%= cart_item.add_tax_price %></td>
+         <td>
+           <%= form_with model: cart_item,url: cart_item_path(cart_item.id),method: :patch do |f| %>
+             <%= f.select :amount, *[1..10] %>
+             <%= f.submit "変更",class: "btn btn-success" %>
+           <% end %>
+         </td>
+         <td><%= cart_item.subtotal %></td>
+         <% total += cart_item.subtotal %>
+       </tr>
+     </tbody>
+     <% end %>
+   </table>
+
+   <%= link_to root_path,class: "btn btn-primary" do %>
+     買い物を続ける
+   <% end %>
+   <table>
+     <tr>
+       <td>合計金額</td>
+       <td><%= total %></td>
+     </tr>
+   </table>
+ </div>
