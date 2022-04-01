@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :addresses,except:[:new, :show, :destroy]
     delete "addresses/:id" => "addresses#destroy",as: "destroy_address"
     resources :items,only:[:index, :show]
+    resources :cart_items, only:[:index, :create, :update, :destroy]
+    delete "cart_items/destroy_all" => "cart_items#destroy_all",as: "destroy_all"
   end
 
 
