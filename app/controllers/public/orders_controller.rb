@@ -15,7 +15,7 @@ class Public::OrdersController < ApplicationController
         order_detail.purchase_price = cart_item.item.add_tax_price
         order_detail.save
       end
-      redirect_to thanks_path
+      redirect_to order_confirm_path
       cart_items.destroy_all
     else
       @order = Order.new(order_params)
@@ -25,15 +25,16 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    if params[:order][:address_id] == 1
-      @order.ship_name = current_customer.name
+    if params[:order][:select_address] == 0
+      @order.ship_name = current_customer.last_name + current_customer.first_name
       @order.ship_postal_code = current_customer.postal_code
       @order.ship_address = current_customer.address
-    elsif params[:order][:address_id] == 2
-      @order.ship_name = Address.find(params[:order][:address_display]).name
-      @order.ship_postal_code = Address.find(params[:order][:address_display]).postal_code
-      @order.ship_address = Address.find(params[:order][:address_display]).address
-    elsif params[:order][:address_id] == 3
+    elsif params[:order][:select_address] == 1
+      @address = Address.find(params[:order][:address_id])
+      @order.ship_name = @address.name
+      @order.ship_postal_code = @address.postal_code
+      @order.ship_address = @address.address
+    elsif params[:order][:select_address] == 2
       address_new = current_customer.addresses.new(address_params)
       if address_new.save
       else
@@ -43,6 +44,7 @@ class Public::OrdersController < ApplicationController
       redirect_to root_path
     end
     @cart_items = current_customer.cart_items.all
+    @order.postage = 800
   end
 
   def index
@@ -54,7 +56,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:ship_postal_code, :ship_address, :ship_name, :repuest_money, :payment, :postage, :status)
+    params.require(:order).permit(:ship_postal_code, :ship_address, :ship_name, :payment)
   end
 
   def address_params
