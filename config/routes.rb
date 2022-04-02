@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
    devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -20,8 +21,11 @@ Rails.application.routes.draw do
     resources :addresses,except:[:new, :show, :destroy]
     delete "addresses/:id" => "addresses#destroy",as: "destroy_address"
     resources :items,only:[:index, :show]
-    resources :cart_items, only:[:index, :create, :update, :destroy]
     delete "cart_items/destroy_all" => "cart_items#destroy_all",as: "destroy_all"
+    resources :cart_items, only:[:index, :create, :update, :destroy]
+    resources :orders, only:[:new, :create, :index, :show]
+    post "orders/confirm" => "orders#confirm",as: "order_confirm"
+    get "orders/thanks" => "orders#thanks",as: "thanks"
   end
 
 
