@@ -1,6 +1,6 @@
 <div class="container">
   <label class="mt-4 mb-4 lead bg-light">注文情報確認</label>
-  
+
   <div class="row">
     <table class="table table-bordered col-md-8">
       <thead>
@@ -26,7 +26,7 @@
       </tbody>
       <% end %>
     </table>
-    
+
     <table class="table table-bordered col-md-2">
       <tr>
         <td>送料</td>
@@ -38,15 +38,23 @@
       </tr>
       <tr>
         <td>請求金額</td>
-        <td><%= total.to_i + @order.postage.to %></td>
+        <td><%= request_money = total.to_i + @order.postage.to_i %></td>
       </tr>
     </table>
   </div>
-  
+
   <label>支払い方法</label>
   <%= @order.payment %>
-  
+
   <label>お届け先</label>
   〒<%= @order.ship_postal_code %> <%= @order.ship_address %><br>
   <%= @order.ship_name %>
+
+  <%= form_with model: @order, url: create_orders_path do |f| %>
+    <%= f.hidden_field :ship_name %>
+    <%= f.hidden_field :ship_address %>
+    <%= f.hidden_field :ship_postal_code %>
+    <%= f.hidden_field :request_money, value:request_money %>
+    <%= f.submit "注文を確定する",class: "btn btn-success" %>
+  <%= end %>
 </div>
