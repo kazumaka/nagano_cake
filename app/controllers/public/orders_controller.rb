@@ -55,9 +55,15 @@ class Public::OrdersController < ApplicationController
 
   def index
     @order_details = OrderDetail.all
+    @orders = Order.all
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details.all
+    @order.postage = 800
+    @total = @order_details.inject(0) { |sum, item| sum + item.subtotal }
+    @sum = @total.to_i + @order.postage.to_i
   end
 
   private

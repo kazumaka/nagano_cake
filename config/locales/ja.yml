@@ -10,3 +10,6 @@ ja:
         making: '製作中'
         preparation: '発送準備中'
         shipping: '発送済み'
+  time:
+   formats:
+    default: "%Y/%m/%d"
