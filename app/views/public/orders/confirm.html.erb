@@ -21,40 +21,39 @@
           <td><%= cart_item.item.add_tax_price %></td>
           <td><%= cart_item.amount %></td>
           <td><%= cart_item.subtotal %></td>
-          <% total += subtotal %>
         </tr>
       </tbody>
       <% end %>
     </table>
 
-    <table class="table table-bordered col-md-2">
+    <table class="table table-bordered col-md-2 ml-5">
       <tr>
         <td>送料</td>
         <td><%= @order.postage %></td>
       </tr>
       <tr>
         <td>商品合計</td>
-        <td><%= total %></td>
+        <td><%= @total %></td>
       </tr>
       <tr>
         <td>請求金額</td>
-        <td><%= request_money = total.to_i + @order.postage.to_i %></td>
+        <td><%= @sum %></td>
       </tr>
     </table>
   </div>
 
   <label>支払い方法</label>
-  <%= @order.payment %>
+  <%= @order.payment_i18n %>
 
   <label>お届け先</label>
-  〒<%= @order.ship_postal_code %> <%= @order.ship_address %><br>
+  〒<%= @order.ship_postal_code %> <%= @order.ship_postal_address %><br>
   <%= @order.ship_name %>
 
   <%= form_with model: @order, url: create_orders_path do |f| %>
     <%= f.hidden_field :ship_name %>
-    <%= f.hidden_field :ship_address %>
+    <%= f.hidden_field :ship_postal_address %>
     <%= f.hidden_field :ship_postal_code %>
-    <%= f.hidden_field :request_money, value:request_money %>
+    <%= f.hidden_field :request_money, value: @sum %>
     <%= f.submit "注文を確定する",class: "btn btn-success" %>
-  <%= end %>
+  <% end %>
 </div>

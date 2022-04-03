@@ -1,7 +1,7 @@
 <div class="container">
   <label class="mt-4 mb-4 lead bg-light">注文情報入力</label>
 
-  <%= form_with model: @order,url: order_confirm_path do |f| %>
+  <%= form_with model: @order,url: order_confirm_path,method: :post do |f| %>
     <div class="form-group">
       <h5>支払い方法</h5>
       <div class="ml-5">
@@ -31,12 +31,12 @@
       <div class="form-group ml-5">
         <%= f.radio_button :select_address, 2 %>
         <%= f.label :select_address_2, "新しいお届け先" %><br>
-        <%= f.label :postal_code, "郵便番号（ハイフンなし）" %>
-        <%= f.text_field :postal_code %><br>
-        <%= f.label :address, "住所" %>
-        <%= f.text_field :address %><br>
-        <%= f.label :name, "名前" %>
-        <%= f.text_field :name %>
+        <%= f.label :ship_postal_code, "郵便番号（ハイフンなし）" %>
+        <%= f.text_field :ship_postal_code %><br>
+        <%= f.label :ship_postal_address, "住所" %>
+        <%= f.text_field :ship_postal_address %><br>
+        <%= f.label :ship_name, "名前" %>
+        <%= f.text_field :ship_name %>
       </div>
 
       <%= f.submit "確認画面へ進む",class: "btn btn-primary ml-5" %>
