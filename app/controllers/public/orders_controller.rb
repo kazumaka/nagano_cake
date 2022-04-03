@@ -8,7 +8,7 @@ class Public::OrdersController < ApplicationController
     @order = current_customer.orders.new(order_params)
     if @order.save
       cart_items.each do |cart_item|
-        order_detail = OrderDetail.new
+        order_detail = OrderDetail.new(order_detail_params)
         order_detail.item_id = cart_item.item_id
         order_detail.order_id = @order.id
         order_detail.amount = cart_item.amount
@@ -61,15 +61,23 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details.all
+    @order_detail = @order.order_details.find(params[:id])
     @order.postage = 800
-    @total = @order_details.inject(0) { |sum, item| sum + item.subtotal }
-    @sum = @total.to_i + @order.postage.to_i
+    @subtotal = @order_detail.purchase_price.to_i * @order_detail.amount.to_i
+    @order_details.each do |order_detail|
+      @total = 0
+      @total += @subtotal
+    end
   end
 
   private
 
   def order_params
     params.require(:order).permit(:payment, :ship_postal_code, :ship_postal_address, :ship_name, :request_money)
+  end
+
+  def order_detail_params
+    params.require(:order_detail).permit(:item_id, :order_id, :amount, :purchase_price)
   end
 
 
