@@ -1,35 +1,65 @@
-<h2>注文履歴詳細</h2>
+<div class="container">
+    <label class="mt-4 mb-4 lead bg-light">注文履歴詳細</label>
+    <div>
+    <label class="mr-5">購入者</label>
+    <%= @order.customer.last_name %><%= @order.customer.first_name %>
+    </div>
+    <div>
+    <label class="mr-5">注文日</label>
+    <%= l @order.created_at %>
+    </div>
+    <div>
+    <label class="mr-5">配送先</label>
+    <label>
+    〒<%= @order.ship_postal_code %> <%= @order.ship_postal_address %><br>
+    <%= @order.ship_name %>
+    </label>
+    </div>
+    <div>
+    <label class="mr-5">支払い方法</label>
+    <%= @order.payment_i18n %>
+    </div>
 
-<label>購入者</label>
-<%= @order.customer.name %>
-<label>注文日</label>
-<%= @order.created_at %>
-<label>配送先</label>
+    <div class="row">
+        <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>商品名</th>
+                    <th>単価（税込）</th>
+                    <th>数量</th>
+                    <th>小計</th>
+                </tr>
+            </thead>
+            <% @order.order_details.each do |order_detail| %>
+            <tbody>
+                <tr>
+                    <td><%= order_detail.item.name %></td>
+                    <td><%= order_detail.purchase_price %></td>
+                    <td><%= order_detail.amount %></td>
+                    <td><%= order_detail.subtotal %></td>
+                </tr>
+            </tbody>
+            <% end %>
+        </table>
+        </div>
+        <div class="col-md-4 ml-5">
+            <div>
+                <label class="lead mr-5">商品合計</label>
+                <label class="ml-1"><%= @total %>円</label>
+            </div>
+            <div>
+                <label class="lead mr-5">送料</label>
+                <label class="ml-5"><%= @order.postage %>円</label>
+            </div>
+            <div>
+                <label class="lead mr-1">請求金額合計</label>
+                <label class="lead"><%= @order.request_money %>円</label>
+            </div>
 
-<label>支払い方法</label>
-<%= @order.payment %>
-<label>注文ステータス</label>
-<%= @order.status %>
+        </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>商品名</th>
-            <th>単価（税込）</th>
-            <th>数量</th>
-            <th>小計</th>
-            <!--<th>製作ステータス</th>-->
-        </tr>
-    </thead>
-    <%= @order_details.each do |order_detail| %>
-    <tbody>
-        <tr>
-            <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.add_tax_purchase_price.to_s(:dalimited) %></td>
-            <td><%= order_detail.amount %></td>
-            <td><%= order_detail.add_tax_purchase_price.to_s(:dalimited) %>*<%= order_detail.amount.to_s %></td>
-            <!--<td></td>-->
-        </tr>
-    </tbody>
-    <% end %>
-</table>
+    </div>
+
+
+</div>
