@@ -52,13 +52,13 @@
         <th>小計</th>
       </tr>
     </thead>
-    <% @order.order_details do |order_detail| %>
+    <% @order.order_details.each do |order_detail| %>
     <tbody>
       <tr>
         <td><%= order_detail.item.name %></td>
         <td><%= order_detail.purchase_price %></td>
         <td><%= order_detail.amount %></td>
-        <td><%= @subtotal %></td>
+        <td><%= order_detail.subtotal %></td>
       </tr>
     </tbody>
     <% end %>
