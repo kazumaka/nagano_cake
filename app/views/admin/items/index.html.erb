@@ -1,12 +1,12 @@
 <div class="container">
-  
+
   <label class="mt-4 mb-4 lead bg-light">商品一覧</label>
   <div class="text-right">
     <%= link_to new_admin_item_path do %>
       <p class="btn btn-primary">新規登録</p>
     <% end %>
   </div>
-  
+
   <table class="table">
     <thead>
       <tr>
@@ -39,4 +39,5 @@
     </tbody>
     <% end %>
   </table>
+  <%= paginate @items %>
 </div>

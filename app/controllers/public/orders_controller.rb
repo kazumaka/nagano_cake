@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+
   def new
     @order = Order.new
   end
@@ -18,7 +20,7 @@ class Public::OrdersController < ApplicationController
       cart_items.destroy_all
       redirect_to thanks_path
     else
-      @order = Order.new(order_params)
+      @order = Order.new
       render :new
     end
   end
@@ -42,10 +44,12 @@ class Public::OrdersController < ApplicationController
         @order.ship_postal_code = address_new.ship_postal_code
         @order.ship_postal_address = address_new.ship_postal_address
       else
+        @order = Order.new
         render :new
       end
     else
-      redirect_to items_path
+      @order = Order.new
+      render :new
     end
     @cart_items = current_customer.cart_items.all
     @order.postage = 800

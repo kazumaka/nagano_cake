@@ -4,6 +4,13 @@ class Item < ApplicationRecord
   has_many :order_details, dependent: :destroy
   has_many :cart_item, dependent: :destroy
 
+  validates :profile_image, presence: true
+  validates :genre_id, presence: true
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :price, presence: true
+  validates :is_active, presence: true
+
   def get_profile_image(width,height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
