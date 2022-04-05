@@ -23,12 +23,13 @@
           <% if customer.is_active == true %>
             退会
           <% else %>
-            有効
+            <label class="text-success">有効</label>
           <% end %>
         </td>
       </tr>
     </tbody>
     <% end %>
   </table>
+  <%= paginate @customers %>
 </div>
 

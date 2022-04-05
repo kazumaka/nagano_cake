@@ -9,7 +9,6 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true
   validates :price, presence: true
-  validates :is_active, presence: true
 
   def get_profile_image(width,height)
     unless profile_image.attached?

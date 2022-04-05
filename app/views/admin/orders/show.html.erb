@@ -2,7 +2,9 @@
     <label class="mt-4 mb-4 lead bg-light">注文履歴詳細</label>
     <div>
     <label class="mr-5">購入者</label>
-    <%= @order.customer.last_name %><%= @order.customer.first_name %>
+    <%= link_to admin_customer_path(@customer.id) do %>
+        <%= @order.customer.last_name %><%= @order.customer.first_name %>
+    <% end %>
     </div>
     <div>
     <label class="mr-5">注文日</label>
@@ -20,7 +22,7 @@
     <%= @order.payment_i18n %>
     </div>
 
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-6">
         <table class="table">
             <thead>

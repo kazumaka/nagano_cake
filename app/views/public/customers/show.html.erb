@@ -1,5 +1,5 @@
 <div class="container">
-  <h4 class="mt-4 mb-4 lead bg-light">マイページ</h4>
+  <label class="mt-4 mb-4 lead bg-light">マイページ</label>
 
   <div class="mb-3">
     <label class="mr-2">登録情報</label>
@@ -7,44 +7,45 @@
       編集する
     <% end %>
   </div>
+  <div class="col-md-6">
+    <table class="table table-bordered">
+      <tr>
+        <td class="table-light col-md-2">氏名</td>
+        <td class="col-md-4"><%= @customer.last_name %> <%= @customer.first_name %></td>
+      </tr>
+      <tr>
+        <td class="table-light col-md-2">フリガナ</td>
+        <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <td class="table-light col-md-2">郵便番号</td>
+        <td><%= @customer.postal_code %></td>
+      </tr>
+      <tr>
+        <td class="table-light col-md-2">住所</td>
+        <td><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <td class="table-light col-md-2">電話番号</td>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <td class="table-light col-md-2">メールアドレス</td>
+        <td><%= @customer.email %></td>
+      </tr>
+    </table>
 
-  <table class="table">
-    <tr>
-      <td>氏名</td>
-      <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-    </tr>
-    <tr>
-      <td>フリガナ</td>
-      <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-    </tr>
-    <tr>
-      <td>郵便番号</td>
-      <td><%= @customer.postal_code %></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= @customer.address %></td>
-    </tr>
-    <tr>
-      <td>電話番号</td>
-      <td><%= @customer.telephone_number %></td>
-    </tr>
-    <tr>
-      <td>メールアドレス</td>
-      <td><%= @customer.email %></td>
-    </tr>
-  </table>
-
-  <div class="mb-3">
-    <label class="mr-4">配送先</label>
-    <%= link_to addresses_path,class: "btn btn-primary" do %>
-      一覧を見る
-    <% end %>
+    <div class="mb-3">
+      <label class="mr-4">配送先</label>
+      <%= link_to addresses_path,class: "btn btn-primary" do %>
+        一覧を見る
+      <% end %>
+  </div>
   </div>
 
 
   <div>
-    <label class="mr-2">注文履歴</label>
+    <label class="mr-4">注文履歴</label>
     <%= link_to orders_path,class: "btn btn-primary" do %>
       一覧を見る
     <% end %>

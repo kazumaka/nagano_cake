@@ -6,5 +6,6 @@ class Admin::OrdersController < ApplicationController
     @order_details = @order.order_details.all
     @total = @order_details.inject(0){|sum, order_detail| sum + order_detail.subtotal}
     @order.postage = 800
+    @customer = @order.customer
   end
 end
