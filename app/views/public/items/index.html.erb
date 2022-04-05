@@ -4,7 +4,9 @@
     <% @items.each do |item| %>
       <div class="col-md-3">
         <div>
+          <%= link_to item_path(item.id) do %>
           <%= image_tag item.get_profile_image(100,100),class: "img-fluid" %>
+          <% end %>
         </div>
         <div>
           <%= link_to item_path(item.id) do %>
