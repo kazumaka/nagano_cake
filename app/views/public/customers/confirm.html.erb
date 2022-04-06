@@ -10,7 +10,7 @@
       <%= link_to customer_path,class: "btn btn-primary" do %>
         退会しない
       <% end %>
-      <%= link_to secession_path,class: "btn btn-danger",method: :patch do %>
+      <%= link_to secession_path,class: "btn btn-danger ml-4",method: :patch, "data-confirm" => "本当に退会しますか？" do %>
         退会する
       <% end %>
     </div>
